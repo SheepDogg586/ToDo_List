@@ -10,3 +10,30 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+.header{
+    font-size: 120px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+.todo-list{
+    border: 1px gray solid;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 32px;
+}
+ul{
+    padding: 0;
+}
+ul li{
+    border: 1px grey solid;
+    list-style: none;
+    padding: 5px;
+}
+input{
+    border: none;
+    width: 100%;
+}
+.btn{
+    float: right;
+    font-size: 25px;
+}
