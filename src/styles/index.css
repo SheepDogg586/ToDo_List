@@ -10,7 +10,9 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
-
+.container{
+    background-color: lightgreen;
+}
 .header{
     font-size: 120px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
