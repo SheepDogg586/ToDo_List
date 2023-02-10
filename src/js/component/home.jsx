@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
@@ -7,6 +7,18 @@ import rigoImage from "../../img/rigo-baby.jpg";
 const Home = () => {
 	const [inputValue, setInputValue] = useState ("")
 	const [todos, setTodos] = useState ([]);
+		useEffect(() => {
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/sheepdogg").then((response) => response.json()).then((responseData) => setTodos(responseData)).catch((err) => console.log(err))
+		},[])
+		useEffect(() => {
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/sheepdogg", {
+				method: "PUT",
+				body: JSON.stringify(todos),
+				headers: {
+				  "Content-Type": "application/json"
+				}
+			}).then((response) => response.json()).then((responseData) => console.log(responseData)).catch((err) => console.log(err))
+		},[todos])
 	return (
 		<div className="container">
 			<div className = "header">todos</div>
@@ -16,9 +28,9 @@ const Home = () => {
 					type = "text" 
 					onChange = {(e) => setInputValue(e.target.value)} 
 					value = {inputValue}
-					onKeyPress = {(e) => {
+					onKeyDown = {(e) => {
 						if (e.key === "Enter") {
-							setTodos(todos.concat([inputValue]));
+							setTodos(todos.concat([{label:inputValue, done: false}]));
 							setInputValue("");
 						}
 					}} 
@@ -26,7 +38,7 @@ const Home = () => {
 					</li>
 					{todos.map((item, index) => (
 						<li>
-						{item} <button className = "btn"
+						{item.label} <button className = "btn"
 						onClick = {() => 
 							setTodos(
 								todos.filter((t, currentIndex) => 
